@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>LMS Chat application</title>
+  <script src="../../socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <style>
+    body {
+      font: 14px Helvetica, Arial;
+      color: azure;
+    }
+
+    form {
+      border-color: #000;
+      border-top-style: solid;
+      border-top-width: 1px;
+      padding: 6px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    form input {
+      border-style: solid;
+      border-width: 2px;
+      padding: 10px;
+      width: 80%;
+      margin-right: .6%;
+      color: rgb(0, 0, 0);
+    }
+
+    form button {
+      border-color: #000;
+      border-top-style: solid;
+      border-top-width: 3px;
+      width: 11%;
+      background: rgb(1, 86, 155);
+      padding: 11px;
+      margin-left: 3%;
+      color: azure;
+    }
+
+    #chat_data {
+      margin: 0;
+      padding: 0;
+      color: azure;
+      list-style-type: none;
+
+    }
+
+    #chat_data li {
+      color: rgb(0, 0, 0);
+      padding: 5px 10px;
+
+    }
+
+    #chat_data li:nth-child(odd) {
+      color: rgb(0, 0, 0);
+      background: rgb(215, 231, 236);
+
+    }
+  </style>
+
+</head>
+
+<body>
+  <%- include("header"); -%>
+  <div id="chat_message">
+    <ul id="chat_data"></ul>
+    <form action="/" method="POST" id="chatData">
+      <input id="chat" placeholder="Enter your message here......" />
+      <button>Send</button>
+    </form>
+    <script>
+      var socketObj = io.connect('<%= host %>')
+
+      $('form').submit(function (obj) {
+        obj.preventDefault();
+        socketObj.emit('chat_message', $('#chat').val());
+        $('#chat').val('');
+        return false;
+      });
+
+      var user = prompt('Please enter your name');
+      socketObj.emit('user', user);
+
+      socketObj.on('has_joined', function (user) {
+        $('#chat_data').append($('<li>').html(user));
+      });
+
+      socketObj.on('has_left', function (user) {
+        $('#chat_data').append($('<li>').html(user));
+      });
+
+      socketObj.on('chat_message', function (text) {
+        $('#chat_data').append($('<li>').html(text));
+      });
+    </script>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>LMS chat session history</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+</head>
+<style>
+  .table {
+    width: 80% !important
+  }
+
+  .display-4 {
+    text-align: center;
+  }
+</style>
+
+<body>
+  <%- include("header"); -%>
+  <h1 class="display-4">LMS chat history</h1>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover mx-auto w-auto">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Message</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% chat.forEach(function(p){ %>
+        <tr>
+          <td><%= p.user %></td>
+          <td><%= p.message %></td>
+          <td><%= p.time %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>

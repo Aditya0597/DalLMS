@@ -1,0 +1,12 @@
+steps:
+  # building the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/csci-5410-279515/lms-g2-website', '.']
+
+  # pushing the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/csci-5410-279515/lms-g2-website']
+
+  # Deploying container image to Cloud Run
+  - name: "gcr.io/cloud-builders/gcloud"
+    args: ['beta', 'run', 'deploy', 'lms-g2-website', '--image', 'gcr.io/csci-5410-279515/lms-g2-website', '--region', 'us-central1', '--allow-unauthenticated', '--platform', 'managed']

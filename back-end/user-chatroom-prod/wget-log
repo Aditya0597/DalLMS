@@ -1,0 +1,6 @@
+--2020-05-14 16:05:16--  http://localhost:9090/api/558/job/getJob?jobID=Job12558
+Resolving localhost (localhost)... 127.0.0.1
+Connecting to localhost (localhost)|127.0.0.1|:9090... connected.
+HTTP request sent, awaiting response... 404 Not Found
+2020-05-14 16:05:16 ERROR 404: Not Found.
+

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>LMS chat</title>
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>    
+</head>
+
+<body>
+    <%- include("header"); -%>
+    <div class="registration-form">
+        <h1>LMS chat</h1>
+        <div>
+            <% if (locals.error) { %>
+            <div class="alert-failure"><%= error %></div>
+            <% } %>
+        </div>
+    </div>
+</body>
+
+</html>
